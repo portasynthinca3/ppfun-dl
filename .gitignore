@@ -1,1 +1,5 @@
-*.png
+/.git
+/.gitignore
+/Coronavirus.png
+/Moon.png
+/Political Compass.png

@@ -16,12 +16,16 @@ def get_chunk(d, x, y):
     successful = False
     data = None
     while not successful:
-        response = requests.get(f'https://pixelplanet.fun/chunks/{d}/{x}/{y}.bmp')
-        data = response.content
-        if response.status_code == 200:
-            successful = True
-        else:
-            print(f'{Fore.YELLOW}Got status code {Fore.RED}{response.status_code}{Fore.YELLOW} from the server. Waiting{Style.RESET_ALL}')
+        try:
+            response = requests.get(f'https://pixelplanet.fun/chunks/{d}/{x}/{y}.bmp')
+            data = response.content
+            if response.status_code == 200:
+                successful = True
+            else:
+                print(f'{Fore.YELLOW}Got status code {Fore.RED}{response.status_code}{Fore.YELLOW} from the server. Waiting{Style.RESET_ALL}')
+                time.sleep(3)
+        except:
+            print(f'{Fore.YELLOW}Error while retrieving data. Waiting{Style.RESET_ALL}')
             time.sleep(3)
     # construct a numpy array from it
     arr = np.zeros((256, 256), np.uint8)
